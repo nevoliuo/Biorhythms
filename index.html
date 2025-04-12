@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./style.css">
+  <title>Биоритмы</title>
+</head>
+<body>
+  <h1>Биоритмы</h1>
+  <p>Дата рождения: 27.08.2008</p>
+  <label>На какую дату ты хочешь узнать свои биоритмы:
+    <input type="date" id="target-date" />
+  </label>
+  <label>
+    Сколько дней показать:
+    <input type="number" id="range-days" min="1" value="5">
+  </label>
+  <canvas id="biorhythm-chart"></canvas>
+  <div class="legend">
+    <span class="red">Физический</span>
+    <span class="blue">Эмоциональный</span>
+    <span class="green">Интеллектуальный</span>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
