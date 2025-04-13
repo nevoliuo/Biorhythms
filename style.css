@@ -12,6 +12,10 @@ h1 {
     color: #d5a2ff;
 }
 
+p {
+    font-weight: 500;
+}
+
 label {
     display: block;
     margin: 1em 0;
@@ -42,20 +46,45 @@ canvas {
 }
 
 .legend {
-    margin-top: 1rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: 14px;
-    font-weight: bold;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 14px;
+  font-weight: bold;
 }
 
-.legend .red { 
-    color: #F28C8C; 
+.legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
 }
-.legend .blue { 
-    color: #8CBDF2; 
+
+.legend-item div:last-child {
+  font-size: 16px;
+  font-weight: 600;
 }
-.legend .green { 
-    color: #8CF2B3; 
+
+.legend .red {
+  color: #F28C8C;
 }
+.legend .blue {
+  color: #8CBDF2;
+}
+.legend .green {
+  color: #8CF2B3;
+}
+  
+.tooltip {
+    position: absolute;
+    background: #222;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+  

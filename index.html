@@ -18,9 +18,18 @@
   </label>
   <canvas id="biorhythm-chart"></canvas>
   <div class="legend">
-    <span class="red">Физический</span>
-    <span class="blue">Эмоциональный</span>
-    <span class="green">Интеллектуальный</span>
+    <div class="legend-item red">
+      <div>Физический</div>
+      <div id="phys-val" style="color: #f0f0f0;">0%</div>
+    </div>
+    <div class="legend-item blue">
+      <div>Эмоциональный</div>
+      <div id="emo-val" style="color: #f0f0f0;">0%</div>
+    </div>
+    <div class="legend-item green">
+      <div>Интеллектуальный</div>
+      <div id="intel-val" style="color: #f0f0f0;">0%</div>
+    </div>
   </div>
   <script src="./script.js"></script>
 </body>

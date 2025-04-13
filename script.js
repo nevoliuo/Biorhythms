@@ -161,3 +161,76 @@ rangeInput.addEventListener("blur", () => {
 
 window.addEventListener("resize", drawGraph);
 drawGraph();
+
+const physVal = document.getElementById("phys-val");
+const emoVal = document.getElementById("emo-val");
+const intelVal = document.getElementById("intel-val");
+
+function updateTodayValues() {
+  const targetDate = new Date(dateInput.value);
+  const baseDaysPassed = calculateDays(targetDate);
+  const [phys, emo, intel] = calculateBiorhythms(baseDaysPassed).map(v => Math.round(v * 100));
+  physVal.textContent = `${phys}%`;
+  emoVal.textContent = `${emo}%`;
+  intelVal.textContent = `${intel}%`;
+}
+
+dateInput.addEventListener("input", updateTodayValues);
+rangeInput.addEventListener("input", updateTodayValues);
+
+updateTodayValues();
+
+const tooltip = document.createElement("div");
+tooltip.className = "tooltip";
+tooltip.style.display = "none";
+document.body.appendChild(tooltip);
+
+canvas.addEventListener("mousemove", (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  const width = rect.width;
+  const height = rect.height;
+  const centerY = height / 2;
+  const amplitude = height * 0.4;
+  const marginX = 20;
+
+  const targetDate = new Date(dateInput.value);
+  const baseDaysPassed = calculateDays(targetDate);
+  const range = parseInt(rangeInput.value) || 5;
+
+  const dayOffset = ((mouseX - marginX) / (width - 2 * marginX)) * range * 2 - range;
+  const daysPassed = baseDaysPassed + dayOffset;
+  const [phys, emo, intel] = calculateBiorhythms(daysPassed);
+
+  const physY = centerY - phys * amplitude;
+  const emoY = centerY - emo * amplitude;
+  const intelY = centerY - intel * amplitude;
+
+  const threshold = 6;
+  const hitPhys = Math.abs(mouseY - physY) < threshold;
+  const hitEmo = Math.abs(mouseY - emoY) < threshold;
+  const hitIntel = Math.abs(mouseY - intelY) < threshold;
+
+  let tooltipContent = "";
+
+  if (hitPhys) {
+    tooltipContent += `<div><span style="color:#F28C8C;">Физ:</span> ${Math.round(phys * 100)}%</div>`;
+  }
+  if (hitEmo) {
+    tooltipContent += `<div><span style="color:#8CBDF2;">Эмоц:</span> ${Math.round(emo * 100)}%</div>`;
+  }
+  if (hitIntel) {
+    tooltipContent += `<div><span style="color:#8CF2B3;">Интел:</span> ${Math.round(intel * 100)}%</div>`;
+  }
+
+  if (tooltipContent) {
+    tooltip.innerHTML = tooltipContent;
+    tooltip.style.display = "block";
+    tooltip.style.left = e.pageX + 15 + "px";
+    tooltip.style.top = e.pageY - 40 + "px";
+  } else {
+    tooltip.style.display = "none";
+  }
+});
